@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+#include <stdio.h>
+using namespace std;
+
+//Samir Fabrizio Carrera Alfaro - UCSP - Ciencia de la Computación I - CCOMP2-1
+
+void espacios(int espacio){ //Función para imprimir el espacio para que se vea la escalera.
+	for(int i=0; i < espacio;i++){
+		cout<<" ";
+	}
+}
+	
+void EscaleraDoble(int escalones, int persona){ //Función para imprimir la escalera y a la persona en el escalon correcto.
+	int espacio=4, esp_largo;
+	while(escalones > 0){ //bucle para hacer la animacion.
+		esp_largo=8*(escalones-1)+5;
+		if(persona==escalones){ //Cuando la pesona esté en el lado positivo de la escalera.
+			cout<<"|_P_";
+			espacios(esp_largo);
+			cout<<"___|";			
+		}if(persona==-(escalones)){//Cuando la pesona esté en el lado negativo de la escalera.
+			cout<<"|___";
+			espacios(esp_largo);
+			cout<<"_P_|";			
+		}if(persona!=escalones&&persona!=-(escalones)){ //Cuando la pesona esté en un escalon distinto.
+			cout<<"|___";
+			espacios(esp_largo);
+			cout<<"___|";
+		}
+		escalones--;
+		cout<<"\n";
+		espacios(espacio);
+		espacio+=4;
+	}
+	if(persona==0){ //Cuando la pesona esté en el escalon 0.
+		cout<<"|_P_|";
+	}else{//Cuando la pesona no esté en el escalon 0.
+		cout<<"|___|";
+	}
+	
+}
+	
+int main(int argc, char *argv[]) {
+	int escalones,animacion,escalon;
+	cout<<"Ingrese el numero de escalones: ";cin>>escalones;//numero de escalones contando desde 0.
+	cout<<"Cuantas veces quiere que la persona haga la animación: ";cin>>animacion;//veces que se realizara la animación.
+	cout<<"En que escalon quiere que empiece la animación: ";cin>>escalon; //escalon en el que se empezará la animación.
+	system("cls");
+	while(animacion>0){ //bucle para que realice la animación "x" veces;
+		for(int i=escalon ; i >= -(escalones); i--){ //Para que la persona baje o suba la escalera de la izquierda.
+			EscaleraDoble(escalones,i);
+			cout<<"\n";
+			system("pause"); //Pausar la pantalla
+			system("cls"); //Borrar la pantalla
+		}
+		for(int i=(-escalones)+1 ; i <= escalones; i++){ //Para que la persona baje o suba la escalera de la derecha.
+			EscaleraDoble(escalones,i);
+			cout<<"\n";
+			system("pause");
+			system("cls");
+		}
+		animacion--;
+	}
+	return 0;
+}
